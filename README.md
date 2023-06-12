@@ -1,1 +1,3 @@
-# {name}
+# fwutil
+
+Python file writing util

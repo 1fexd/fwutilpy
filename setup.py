@@ -5,7 +5,7 @@ setup(
     packages=find_packages(),
     description='File writing util',
     author='1fexd',
-    license='GPL3',
+    license='GPL-3',
     setuptools_git_versioning={"enabled": True},
-    setup_requires=["setuptools-git-versioning<2"],
+    setup_requires=["setuptools-git-versioning<2"]
 )
