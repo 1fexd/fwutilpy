@@ -6,9 +6,9 @@ class FileWriter:
     def __init__(self, file: TextIO):
         self.file = file
 
-    def write_text_new_line(self, text: str, indent="", clean=False):
+    def write_text_new_line(self, text: str, indent="", new_lines: int = 1, clean=False):
         self.write(text, indent, clean)
-        self.write_new_line(1)
+        self.write_new_line(new_lines)
 
     def write_new_line(self, amount: int = 1):
         for i in range(0, amount):
