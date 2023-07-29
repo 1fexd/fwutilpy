@@ -27,15 +27,15 @@ class FileWriter(contextlib.AbstractContextManager):
         self._file.close()
 
     def write_line(self, text: str, indent="", new_lines: int = 0, clean=False):
-        self.write_multiline(text, indent, clean)
+        self.write_multiline(text, indent, clean, auto_newline=False)
         self.new_line(new_lines)
 
     def new_line(self, amount: int = 1):
         for i in range(0, amount):
             self._write(self.__NEW_LINE)
 
-    def write_multiline(self, text: str, indent="", strip_first_newline=True, clean=True):
-        if self.__has_buffered_lines():
+    def write_multiline(self, text: str, indent="", strip_first_newline=True, clean=True, auto_newline=True):
+        if auto_newline and self.__has_buffered_lines():
             self.new_line()
 
         if clean:
