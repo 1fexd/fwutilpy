@@ -48,17 +48,13 @@ class FileWriter(contextlib.AbstractContextManager):
 
         self._write(text)
 
-    def write_list(self, text_list: [str], separator: str = ", ", indent: str = "", new_lines: int = 0, clean=False):
-        self.write_line(separator.join(text_list), indent, new_lines, clean)
-
     T = TypeVar("T")
 
-    def transform_and_write_list(self, items: [T], separator: str = ", ",
-                                 transform: Callable[[T], str] = lambda val: str(val),
-                                 indent: str = "",
-                                 new_lines: int = 0,
-                                 clean=False):
-        return self.write_list([transform(item) for item in items], separator, indent, new_lines, clean)
+    def write_list(self, items: [T], separator: str = ", ",
+                   transform: Optional[Callable[[T], str]] = None,
+                   indent: str = "", new_lines: int = 0, clean: bool = False):
+        text_list = items if transform is None else [transform(item) for item in items]
+        self.write_line(separator.join(text_list), indent, new_lines, clean)
 
     def _write(self, text: str):
         self._file.write(text)
